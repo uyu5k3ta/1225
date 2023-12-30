@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess the Number Game</title>
+
+
+  <style>
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    #result {
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 300px; 
+      height: 200px; 
+      margin: 20px auto;
+    }
+  </style>
+
+
+  <script>
+    function generateRandomNumber() {
+
+      return Math.floor(Math.random() * 10) + 1;
+    }
+
+    function playMusic(audioSrc) {
+      var audio = new Audio(audioSrc);
+      audio.play();
+    }
+
+    function checkGuess() {
+
+      var userGuess = document.getElementById("userGuess").value;
+
+
+      var randomNumber = generateRandomNumber();
+
+  
+      if (userGuess == randomNumber) {
+        document.getElementById("result").style.backgroundImage = "url('picture2.jpeg')";
+        document.getElementById("resultText").innerText = "Congratulations! You guessed the correct number!";
+        playMusic('music2.mp3')
+      else {
+        document.getElementById("result").style.backgroundImage = "url('picture1.jpeg')";
+        document.getElementById("resultText").innerText = "Sorry, Try again!";
+        playMusic('music1.mp3')
+      }
+    }
+
+    document.getElementById("userGuess").addEventListener("keyup", function(event) {
+      if (event.key === "Enter") {
+        checkGuess();
+      }
+    });
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Guess the Number Game</h1>
+    <p>Guess a number between 1 and 10:</p>
+
+
+    <input type="number" id="userGuess" placeholder="Enter your guess">
+    <button onclick="checkGuess()">Check Guess</button>
+
+    <div id="result"></div>
+    <p id="resultText"></p>
+  </div>
+
+</body>
+</html>
+
+
+
